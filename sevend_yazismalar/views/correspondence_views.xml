@@ -112,7 +112,7 @@
                                     <field name="job_title_en"/>
                                 </group>
                                 <group string="İlgi Menüsü">
-                                    <field name="reference_ids" widget="many2many_tags" domain="[('id', '!=', active_id)]"/>
+                                    <field name="reference_ids" widget="many2many_tags"/>
                                     <field name="reference_text"/>
                                 </group>
                             </group>
