@@ -32,4 +32,10 @@ Temel Özellikler:
     'license': 'OPL-1',
     'price': 0.00,
     'currency': 'EUR',
+    'icon': 'static/description/icon.png',
+    'images': [
+        'static/description/icon.png',
+        'static/description/banner.png',
+        'static/description/screenshot_1.png',
+    ],
 }
