@@ -5,14 +5,14 @@
         <field name="name">sevend.correspondence.tree</field>
         <field name="model">sevend.correspondence</field>
         <field name="arch" type="xml">
-            <tree string="Yazışmalar">
+            <list string="Yazışmalar">
                 <field name="name"/>
                 <field name="date"/>
                 <field name="type" widget="badge" decoration-info="type == 'incoming'" decoration-warning="type == 'outgoing'"/>
                 <field name="subject"/>
                 <field name="recipient_name"/>
                 <field name="state" widget="badge" decoration-success="state == 'sent'"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -168,7 +168,7 @@
     <record id="action_sevend_correspondence" model="ir.actions.act_window">
         <field name="name">Yazışmalar</field>
         <field name="res_model">sevend.correspondence</field>
-        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_mode">kanban,list,form</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 İlk yazışmanızı oluşturun!
