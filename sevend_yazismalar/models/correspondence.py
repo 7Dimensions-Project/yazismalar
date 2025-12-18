@@ -4,6 +4,7 @@ class SevendCorrespondence(models.Model):
     _name = 'sevend.correspondence'
     _description = 'Yazışmalar'
     _inherit = ['mail.thread', 'mail.activity.mixin']
+    _rec_name = 'name'
     _order = 'date desc, id desc'
 
     name = fields.Char(string='Referans ID', required=True, copy=False, readonly=True, default='Yeni')
@@ -65,11 +66,8 @@ class SevendCorrespondence(models.Model):
     def create(self, vals):
         if vals.get('name', 'Yeni') == 'Yeni':
             # Use separate sequences based on type
-            seq_code = 'sevend.correspondence'
-            if vals.get('type') == 'incoming':
-                seq_code = 'sevend.correspondence.incoming'
-            elif vals.get('type') == 'outgoing':
-                seq_code = 'sevend.correspondence.outgoing'
+            letter_type = vals.get('type') or 'incoming'
+            seq_code = 'sevend.correspondence.incoming' if letter_type == 'incoming' else 'sevend.correspondence.outgoing'
             
             vals['name'] = self.env['ir.sequence'].next_by_code(seq_code) or 'Yeni'
         return super(SevendCorrespondence, self).create(vals)
