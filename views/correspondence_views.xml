@@ -60,11 +60,15 @@
         <field name="arch" type="xml">
             <form string="Yazışma Detayı">
                 <header>
-                    <button name="action_send_mail" string="E-Mail Gönder" type="object" class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_post" string="Onayla / Gönder" type="object" class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_reply" string="Cevap Yaz" type="object" class="btn-info" invisible="type != 'incoming'"/>
+                    <button name="action_draft" string="Taslağa Al" type="object" invisible="state == 'draft'"/>
+                    <button name="action_send_mail" string="E-Mail Gönder" type="object" invisible="state == 'draft'"/>
                     <field name="state" widget="statusbar" statusbar_visible="draft,sent,replied"/>
                 </header>
                 <sheet>
                     <div class="oe_title">
+                        <span class="o_form_label">Referans ID</span>
                         <h1>
                             <field name="name" readonly="1"/>
                         </h1>
@@ -72,18 +76,17 @@
                     <group>
                         <group string="Genel Bilgiler">
                             <field name="type" widget="radio" options="{'horizontal': true}"/>
+                            <field name="partner_id" options="{'no_create': True}"/>
                             <field name="date"/>
                             <field name="project_code"/>
                             <field name="series"/>
+                        </group>
+                        <group string="Doküman &amp; Kurum Bilgisi">
                             <field name="department"/>
                             <field name="document_number"/>
                             <field name="branch"/>
-                        </group>
-                        <group string="Alıcı / Gönderici Bilgileri">
                             <field name="recipient_name"/>
                             <field name="recipient_email"/>
-                            <field name="cc_list"/>
-                            <field name="recipient_address"/>
                         </group>
                     </group>
                     <notebook>
@@ -109,22 +112,20 @@
                                     <field name="job_title_en"/>
                                 </group>
                                 <group string="İlgi Menüsü">
-                                    <field name="reference_ids" widget="many2many_tags"/>
+                                    <field name="reference_ids" widget="many2many_tags" domain="[('id', '!=', active_id)]"/>
                                     <field name="reference_text"/>
-                                    <field name="reference_text_en"/>
                                 </group>
                             </group>
                         </page>
-                        <page string="Teknik Bilgiler &amp; Dosyalar">
+                        <page string="Dosyalar &amp; Ekler">
                             <group>
                                 <group>
                                     <field name="sharepoint_link" widget="url"/>
                                     <field name="pdf_url" widget="url"/>
-                                    <field name="test_counter"/>
+                                    <field name="attachment_ids" widget="many2many_binary"/>
                                 </group>
                                 <group>
-                                    <field name="visual" widget="image" class="oe_avatar" string="Görsel / Belge"/>
-                                    <field name="is_mail_sent" readonly="1"/>
+                                    <field name="visual" widget="image" class="oe_avatar" string="Birincil Görsel"/>
                                 </group>
                             </group>
                         </page>
@@ -136,6 +137,30 @@
                     <field name="message_ids"/>
                 </div>
             </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_correspondence_search" model="ir.ui.view">
+        <field name="name">sevend.correspondence.search</field>
+        <field name="model">sevend.correspondence</field>
+        <field name="arch" type="xml">
+            <search string="Yazışma Filtrele">
+                <field name="name"/>
+                <field name="subject"/>
+                <field name="partner_id"/>
+                <field name="recipient_name"/>
+                <filter string="Gelen" name="incoming" domain="[('type', '=', 'incoming')]"/>
+                <filter string="Giden" name="outgoing" domain="[('type', '=', 'outgoing')]"/>
+                <separator/>
+                <filter string="Taslak" name="draft" domain="[('state', '=', 'draft')]"/>
+                <filter string="Gönderildi" name="sent" domain="[('state', '=', 'sent')]"/>
+                <group expand="0" string="Grupla">
+                    <filter string="Tip" name="group_type" context="{'group_by': 'type'}"/>
+                    <filter string="Durum" name="group_state" context="{'group_by': 'state'}"/>
+                    <filter string="Tarih" name="group_date" context="{'group_by': 'date'}"/>
+                </group>
+            </search>
         </field>
     </record>
 

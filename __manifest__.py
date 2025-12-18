@@ -24,6 +24,7 @@ Temel Özellikler:
         'security/ir.model.access.csv',
         'data/ir_sequence_data.xml',
         'views/correspondence_views.xml',
+        'views/correspondence_report.xml',
         'views/menu_views.xml',
     ],
     'application': True,

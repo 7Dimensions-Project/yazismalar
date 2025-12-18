@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data noupdate="1">
-        <record id="seq_sevend_correspondence" model="ir.sequence">
-            <field name="name">Yazışma Numarası</field>
-            <field name="code">sevend.correspondence</field>
-            <field name="prefix">Y-</field>
+        <record id="seq_sevend_correspondence_incoming" model="ir.sequence">
+            <field name="name">Gelen Yazı Numarası</field>
+            <field name="code">sevend.correspondence.incoming</field>
+            <field name="prefix">GEL-%(range_year)s-</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_sevend_correspondence_outgoing" model="ir.sequence">
+            <field name="name">Giden Yazı Numarası</field>
+            <field name="code">sevend.correspondence.outgoing</field>
+            <field name="prefix">GID-%(range_year)s-</field>
             <field name="padding">5</field>
             <field name="company_id" eval="False"/>
         </record>
