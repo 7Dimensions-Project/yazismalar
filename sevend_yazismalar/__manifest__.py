@@ -30,6 +30,6 @@ Temel Özellikler:
     'application': True,
     'installable': True,
     'license': 'OPL-1',
-    'price': 49.00,
+    'price': 0.00,
     'currency': 'EUR',
 }
