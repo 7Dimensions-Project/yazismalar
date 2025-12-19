@@ -152,7 +152,6 @@
                 <field name="recipient_name"/>
                 <filter string="Gelen" name="incoming" domain="[('type', '=', 'incoming')]"/>
                 <filter string="Giden" name="outgoing" domain="[('type', '=', 'outgoing')]"/>
-                <separator/>
                 <filter string="Taslak" name="draft" domain="[('state', '=', 'draft')]"/>
                 <filter string="Gönderildi" name="sent" domain="[('state', '=', 'sent')]"/>
                 <group expand="0" string="Grupla">
