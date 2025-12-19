@@ -28,7 +28,7 @@
                 <field name="state"/>
                 <field name="type"/>
                 <templates>
-                    <t t-name="kanban-box">
+                    <t t-name="card">
                         <div class="oe_kanban_global_click">
                             <div class="oe_kanban_details">
                                 <strong class="o_kanban_record_title">
@@ -41,7 +41,7 @@
                                     <field name="subject"/>
                                 </div>
                                 <div class="mt-2">
-                                    <span t-attf-class="badge badge-#{record.state.raw_value == 'draft' ? 'warning' : 'success'}">
+                                    <span t-attf-class="badge badge-#{record.state.raw_value == 'draft' ? 'warning' : 'info'}">
                                         <field name="state"/>
                                     </span>
                                 </div>
