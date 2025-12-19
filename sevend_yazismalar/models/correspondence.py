@@ -62,15 +62,16 @@ class SevendCorrespondence(models.Model):
     visual = fields.Binary(string='Görsel / Belge')
     attachment_ids = fields.Many2many('ir.attachment', string='Ek Dosyalar')
 
-    @api.model
-    def create(self, vals):
-        if vals.get('name', 'Yeni') == 'Yeni':
-            # Use separate sequences based on type
-            letter_type = vals.get('type') or 'incoming'
-            seq_code = 'sevend.correspondence.incoming' if letter_type == 'incoming' else 'sevend.correspondence.outgoing'
-            
-            vals['name'] = self.env['ir.sequence'].next_by_code(seq_code) or 'Yeni'
-        return super(SevendCorrespondence, self).create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if vals.get('name', 'Yeni') == 'Yeni':
+                # Use separate sequences based on type
+                letter_type = vals.get('type') or 'incoming'
+                seq_code = 'sevend.correspondence.incoming' if letter_type == 'incoming' else 'sevend.correspondence.outgoing'
+                
+                vals['name'] = self.env['ir.sequence'].next_by_code(seq_code) or 'Yeni'
+        return super(SevendCorrespondence, self).create(vals_list)
 
     def action_post(self):
         """ Approve/Send the letter """
