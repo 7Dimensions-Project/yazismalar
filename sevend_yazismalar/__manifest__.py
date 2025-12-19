@@ -1,6 +1,6 @@
 {
     'name': '7D Yazışmalar (Correspondence Management)',
-    'version': '19.0.1.0.4',
+    'version': '19.0.1.0.5',
     'category': 'Sales/CRM',
     'summary': 'Gelen ve Giden resmi yazışmaların takibi, arşivlenmesi ve yönetimi.',
     'description': """
