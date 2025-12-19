@@ -145,20 +145,13 @@
         <field name="name">sevend.correspondence.search</field>
         <field name="model">sevend.correspondence</field>
         <field name="arch" type="xml">
-            <search string="Yazışma Filtrele">
+            <search>
                 <field name="name"/>
                 <field name="subject"/>
                 <field name="partner_id"/>
-                <field name="recipient_name"/>
-                <filter string="Gelen" name="incoming" domain="[('type', '=', 'incoming')]"/>
-                <filter string="Giden" name="outgoing" domain="[('type', '=', 'outgoing')]"/>
-                <filter string="Taslak" name="draft" domain="[('state', '=', 'draft')]"/>
-                <filter string="Gönderildi" name="sent" domain="[('state', '=', 'sent')]"/>
-                <group expand="0" string="Grupla">
-                    <filter string="Tip" name="group_type" context="{'group_by': 'type'}"/>
-                    <filter string="Durum" name="group_state" context="{'group_by': 'state'}"/>
-                    <filter string="Tarih" name="group_date" context="{'group_by': 'date'}"/>
-                </group>
+                <filter string="Gelen" name="filter_incoming" domain="[('type', '=', 'incoming')]"/>
+                <filter string="Giden" name="filter_outgoing" domain="[('type', '=', 'outgoing')]"/>
+                <filter string="Taslak" name="filter_draft" domain="[('state', '=', 'draft')]"/>
             </search>
         </field>
     </record>
